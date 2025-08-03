@@ -1,0 +1,51 @@
+# dependencies
+node_modules/
+
+# production builds
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# testing
+coverage/
+*.lcov
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# lockfiles (optional, if you prefer to ignore them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# cache
+.cache/
+.temp/
+*.tsbuildinfo
+
+# misc
+*.local
+*.swp
+*.bak
+*.orig
