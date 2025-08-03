@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>محاسبه آنلاین قیمت طلا</title>
+    <link rel="stylesheet" href="./css/tailwind.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body class="flex flex-col items-center justify-center min-h-screen px-2 xs:px-4 sm:px-6">
+    <!-- title -->
+    <div
+      class="text-center md:pt-8 mb-6 w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl"
+    >
+      <h1
+        id="title"
+        class="text-gray-900 font-bold text-lg xs:text-xl sm:text-2xl md:text-3xl mb-2 px-2"
+      >
+        محاسبه آنلاین قیمت طلا
+      </h1>
+      <div class="mb-2 flex items-center justify-center">
+        <p id="date" class="text-xs xs:text-sm sm:text-base md:text-lg px-2">
+          قیمت روز طلا ۱۱ مرداد ۱۴۰۴ :
+        </p>
+        <span id="new-rate" class="font-semibold">۷,۳۱۷,۰۰۰</span>
+      </div>
+      <span class="text-gray-600 text-xs xs:text-sm sm:text-base px-2">
+        بر اساس فرمول محاسبه اتحادیه طلا
+      </span>
+    </div>
+
+    <!-- kind of gold btns -->
+    <div
+      class="mb-8 flex flex-col sm:flex-row justify-center items-center gap-3 w-full max-w-xs xs:max-w-sm sm:max-w-md px-2"
+    >
+      <button
+        id="new-gold"
+        class="w-full sm:w-auto bg-yellow-400 text-slate-800 p-3 rounded-lg text-base sm:text-lg font-medium"
+      >
+        طلا ۱۸ عیار
+      </button>
+      <button
+        id="used-gold"
+        class="w-full sm:w-auto bg-yellow-400 text-slate-800 p-3 rounded-lg text-base sm:text-lg font-medium"
+      >
+        طلا دست دوم
+      </button>
+    </div>
+
+    <!-- inputs -->
+    <div
+      class="w-full mb-8 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl px-2 xs:px-4 sm:px-6"
+    >
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+        <!-- firts column -->
+        <div class="space-y-4 sm:space-y-5">
+          <!-- gold rate  -->
+          <div class="relative">
+            <span
+              class="absolute top-0 right-4 -translate-y-1/2 bg-white px-1 text-sm text-gray-600 z-10"
+              >نرخ طلا</span
+            >
+            <div
+              class="flex items-center justify-between border border-gray-300 bg-white rounded-lg px-4 py-3"
+            >
+              <span
+                id="gold-price"
+                class="flex-1 text-base sm:text-lg font-semibold text-gray-800 text-center"
+              ></span>
+              <span class="text-slate-800 text-sm sm:text-base mr-2">تومان</span>
+            </div>
+          </div>
+
+          <!-- wages  -->
+          <div class="relative">
+            <span
+              class="absolute top-0 right-4 -translate-y-1/2 bg-white px-1 text-sm text-gray-600 z-10"
+              >اجرت ساخت</span
+            >
+            <div
+              class="flex items-end justify-between border border-gray-300 bg-white rounded-lg px-4 py-3"
+            >
+              <input
+                id="wage-input"
+                type="text"
+                name="wages"
+                value="18"
+                class="flex-1 sm:text-sm sm:-ml-3 text-base font-semibold text-gray-800 text-center bg-transparent focus:outline-none px-4"
+              />
+              <span class="text-slate-800 text-sm sm:text-base sm:-mr-2">درصد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- second column  -->
+        <div class="space-y-4 sm:space-y-5">
+          <!-- gold weight  -->
+          <div class="relative">
+            <span
+              class="absolute top-0 right-4 -translate-y-1/2 bg-white px-1 text-sm text-gray-600 z-10"
+              >وزن طلا</span
+            >
+            <div
+              class="flex items-center justify-between border border-gray-300 bg-white rounded-lg px-4 py-3"
+            >
+              <input
+                id="weight-input"
+                type="text"
+                name="weight"
+                value="۰"
+                class="flex-1 sm:text-sm sm:-ml-3 text-base font-semibold text-gray-800 text-center bg-transparent focus:outline-none px-4"
+              />
+              <span class="text-slate-800 text-sm sm:text-base sm:mr-2">گرم</span>
+            </div>
+          </div>
+
+          <!-- profit section  -->
+          <div class="relative">
+            <span
+              class="absolute top-0 right-4 -translate-y-1/2 bg-white px-1 text-sm text-gray-600 z-10"
+              >سود فروش</span
+            >
+            <div
+              class="flex items-center justify-between border border-gray-300 bg-white rounded-lg px-4 py-3"
+            >
+              <input
+                type="text"
+                id="profit-input"
+                name="profit"
+                value="7"
+                class="flex-1 sm:text-sm sm:-ml-3 text-base font-semibold text-gray-800 text-center bg-transparent focus:outline-none px-4"
+              />
+              <span class="text-slate-800 text-sm sm:text-base sm:mr-2">درصد</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- info cart   -->
+    <div
+      class="w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl px-2 xs:px-4 sm:px-6 mb-8"
+    >
+      <div class="flex flex-col lg:flex-row gap-6 items-stretch">
+        <!-- market cart  -->
+        <div class="flex-1 flex flex-col bg-yellow-300 rounded-xl overflow-hidden">
+          <div
+            id="market-cart-title"
+            class="bg-yellow-200 p-4 text-center text-sm sm:text-base font-medium"
+          >
+            خرید طلا از بازار
+          </div>
+          <div
+            class="flex-1 px-4 sm:px-5 py-4 text-sm sm:text-base flex flex-col justify-between text-right"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-5">
+                <div class="flex-1">
+                  <p class="font-medium mb-1">قیمت طلای محصول:</p>
+                  <p class="text-gray-700">وزن ✕ نرخ روز طلا</p>
+                </div>
+                <span id="gold-calculate-price" class="font-semibold mr-3 whitespace-nowrap"
+                  >۰ تومان</span
+                >
+              </div>
+              <div class="flex justify-between items-start mb-5">
+                <div class="flex-1">
+                  <p class="font-medium mb-1">اجرت ساخت:</p>
+                  <p class="text-gray-700">قیمت طلا ✕ <span id="wage-value"> 18</span> %</p>
+                </div>
+                <span id="gold-calculate-wage" class="font-semibold mr-3 whitespace-nowrap"
+                  >۰ تومان</span
+                >
+              </div>
+              <div class="flex justify-between items-start mb-5">
+                <div class="flex-1">
+                  <p class="font-medium mb-1">سود فروش طلا:</p>
+                  <p class="text-gray-700">(قیمت طلا + اجرت ساخت) ✕ 0 %</p>
+                </div>
+                <span id="gold-calculate-profit" class="font-semibold mr-3 whitespace-nowrap"
+                  >۰ تومان</span
+                >
+              </div>
+              <div class="flex justify-between items-start">
+                <div class="flex-1">
+                  <p class="font-medium mb-1">مالیات:</p>
+                  <p class="text-gray-700">(سود فروش طلا + اجرت ساخت) ✕ 9 %</p>
+                </div>
+                <span id="gold-calculate-tax" class="font-semibold mr-3 whitespace-nowrap"
+                  >۰ تومان</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- talasi cart  -->
+        <div class="flex-1 flex flex-col bg-yellow-300 rounded-xl overflow-hidden">
+          <div
+            id="talasi-cart-title"
+            class="bg-yellow-200 p-4 text-center text-sm sm:text-base font-medium"
+          >
+            خرید طلا از طلاسی
+          </div>
+          <div
+            class="flex-1 px-4 sm:px-5 py-4 text-sm sm:text-base flex flex-col justify-between text-right"
+          >
+            <div class="flex justify-between items-start" style="min-height: 120px">
+              <div class="flex-1">
+                <p class="font-medium mb-1">قیمت طلای محصول:</p>
+                <p class="text-gray-700">وزن ✕ نرخ روز طلا</p>
+              </div>
+              <span id="talasi-total" class="font-semibold mr-3 whitespace-nowrap">۰ تومان</span>
+            </div>
+            <div class="flex justify-between items-start mt-5" style="min-height: 120px">
+              <div class="flex-1">
+                <p class="font-medium mb-1">سود فروش طلا:</p>
+                <p class="text-gray-700">قیمت طلا ✕ 1.00 %</p>
+              </div>
+              <span id="talasi-profit" class="font-semibold mr-3 whitespace-nowrap">۰ تومان</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- subs+ -->
+    <div
+      class="w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl px-2 xs:px-4 sm:px-6"
+    >
+      <div class="flex flex-col lg:flex-row gap-6">
+        <div class="flex-1">
+          <div class="bg-yellow-600 text-white p-4 rounded-xl text-center">
+            <p class="text-sm sm:text-base font-medium mb-1">جمع کل خرید از بازار:</p>
+            <p id="total-market" class="text-xl sm:text-2xl font-bold">۰ تومان</p>
+          </div>
+        </div>
+        <div class="flex-1">
+          <div class="bg-yellow-600 text-white p-4 rounded-xl text-center">
+            <p class="text-sm sm:text-base font-medium mb-1">جمع کل خرید از طلاسی:</p>
+            <p id="total-talasi" class="text-xl sm:text-2xl font-bold">۰ تومان</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/src/js/script.js"></script>
+  </body>
+</html>
